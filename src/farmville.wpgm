@@ -1,0 +1,27 @@
+import wollok.game.*
+import hector.*
+import plantas.*
+program farmville {
+	// Configuracion Inicial
+	game.title("FarmVille")
+	game.height(10)
+	game.width(10)
+	game.ground("ground.png")
+	
+	game.addVisualCharacter(hector)
+	
+	keyboard.m().onPressDo { hector.plantaMaiz()}
+	keyboard.t().onPressDo { hector.plantaTrigo()}
+	keyboard.o().onPressDo { hector.plantaTomaco()}
+	keyboard.r().onPressDo { 
+		if(game.colliders(hector).isEmpty()){
+			throw new Exception("No tengo nada para regar")
+		}else{
+			hector.regar(game.colliders(hector).first())
+		}
+			
+	}
+	
+	
+	game.start()
+}
